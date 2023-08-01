@@ -163,11 +163,12 @@ def main():
             print("li")
     if selected_option == "Internal Marks Analyzer":
         st.title("Your INSIGHTS")
-        uploaded_file = st.sidebar.file_uploader("Choose an Excel file", type=['xlsx'],key=1)
+        uploaded_file = st.sidebar.file_uploader("Choose an Excel file", type=['xlsx'],key=2)
         if uploaded_file is not None:
             st.markdown("""<hr width='100%' style='height:10px;border:none;border-style:'dashed';background-color:#333;' /> """, unsafe_allow_html=True)
             df = pd.read_excel(uploaded_file, engine='openpyxl')
             l=df.columns
+            # st.write(l)
             l1=[l[0]]
             for i in range(5,11):
                 l1.append(l[i])
@@ -197,7 +198,7 @@ def main():
                 col.append(i+"_Int")
             df.columns=col
             st.title("Select subject to get failures")
-            sub_choice = st.selectbox("Select your subject", sub,key=10)
+            sub_choice = st.selectbox("Select your subject", sub,key=20)
             sub_choice+="_Int"
             ans=[[],[]]
             for index, row in df.iterrows():
@@ -209,7 +210,7 @@ def main():
             st.write(d)
             st.markdown("""<hr width='100%' style='height:10px;border:none;border-style:'dashed';background-color:#333;' /> """, unsafe_allow_html=True)
             st.title("Select subject and your choice")
-            sub_choice1 = st.selectbox("Select your subject", sub,key=11)
+            sub_choice1 = st.selectbox("Select your subject", sub,key=21)
             ans1=[[],[]]
             for index, row in df.iterrows():
                #st.write(type(row[sub_choice1+"_1"]),row[sub_choice1+"_2"])
@@ -218,7 +219,7 @@ def main():
                 elif(row[sub_choice1+"_1"]>row[sub_choice1+"_2"]):
                     ans1[1].append(row[col[0]])
             #st.title("Select your choice")
-            choice1 = st.selectbox("Select your choice",['Mid_1<Mid_2','Mid_2<Mid_1'],key=110)
+            choice1 = st.selectbox("Select your choice",['Mid_1<Mid_2','Mid_2<Mid_1'],key=220)
             st.title(f"Students whose performance is {choice1}")
             if(choice1=='Mid_1<Mid_2'):
                 d=pd.DataFrame(ans1[0],columns=[col[0]])
